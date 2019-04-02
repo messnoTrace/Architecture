@@ -149,16 +149,11 @@ build_versions.min_sdk = 17
 build_versions.target_sdk = 27
 build_versions.build_tools = "27.0.3"
 
-build_versions.applicationId = "cn.com.open.shuxiaotong"
 build_versions.versionCode = 1000
 build_versions.versionName = "1.0.0"
 
 
 
-build_versions.KEY_ALIAS = "shuxiaotong"
-build_versions.KEY_PASSWORD = "sxt&open"
-build_versions.STORE_FILE = "shuxiaotong.jks"
-build_versions.KEYSTORE_PASSWORD = "sxt&open"
 
 build_versions.ndk_build = false
 
