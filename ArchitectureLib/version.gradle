@@ -1,0 +1,186 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+def versions = [:]
+versions.room = "1.1.0"
+versions.lifecycle = "1.1.1"
+versions.support = "27.1.1"
+versions.junit = "4.12"
+versions.retrofit = "2.3.0"
+versions.okhttp_logging_interceptor = "3.9.0"
+versions.mockwebserver = "3.8.1"
+versions.apache_commons = "2.5"
+versions.mockito = "2.7.19"
+versions.mockito_all = "1.10.19"
+versions.constraint_layout = "1.1.0"
+versions.glide = "4.7.1"
+versions.logger = "2.2.0"
+versions.android_gradle_plugin = "3.3.2"
+versions.rxjava2 = "2.1.3"
+versions.rx_android = "2.0.1"
+versions.kotlin = "1.3.21"
+versions.paging = "1.0.0"
+versions.work = "1.0.0-alpha02"
+versions.arouter_api = "1.3.1"
+versions.arouter_compiler = "1.1.4"
+versions.autodispose = "0.8.0"
+versions.tinypinyin = "2.0.3"
+versions.anko = "0.10.5"
+versions.loadmore = "1.0.1"
+versions.slidingtab = "1.0.0"
+versions.biding_recycler_view = "1.0.3"
+versions.load_retry_manager = "1.0.1"
+versions.hawk = "2.0.1"
+versions.status_bar_compat = "0.7"
+versions.bannerviewVer="1.0.8"
+versions.refresh = "1.0.3"
+versions.player = "1.0.3.1-SNAPSHOT"
+versions.analytics = "6.1.4"
+versions.walle = "1.1.6"
+versions.permissionsdispatcher = "3.3.1"
+versions.ucrop = "2.2.2"
+versions.easyimage = "2.1.0"
+versions.zxing = "3.3.3"
+versions.android_pickerview = "4.1.6"
+versions.compresshelper = "1.0.5"
+def deps = [:]
+
+def support = [:]
+support.annotations = "com.android.support:support-annotations:$versions.support"
+support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview = "com.android.support:cardview-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.core_utils = "com.android.support:support-core-utils:$versions.support"
+deps.support = support
+
+def room = [:]
+room.runtime = "android.arch.persistence.room:runtime:$versions.room"
+room.compiler = "android.arch.persistence.room:compiler:$versions.room"
+room.rxjava2 = "android.arch.persistence.room:rxjava2:$versions.room"
+room.testing = "android.arch.persistence.room:testing:$versions.room"
+deps.room = room
+
+def lifecycle = [:]
+lifecycle.runtime = "android.arch.lifecycle:runtime:$versions.lifecycle"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.lifecycle"
+lifecycle.compiler = "android.arch.lifecycle:compiler:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.mock = "com.squareup.retrofit2:retrofit-mock:$versions.retrofit"
+deps.retrofit = retrofit
+deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
+
+def mockito = [:]
+mockito.core = "org.mockito:mockito-core:$versions.mockito"
+mockito.all = "org.mockito:mockito-all:$versions.mockito_all"
+deps.mockito = mockito
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+
+deps.kotlin = kotlin
+deps.paging = "android.arch.paging:runtime:$versions.paging"
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+def arouter = [:]
+arouter.api = "com.alibaba:arouter-api:$versions.arouter_api"
+arouter.compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+deps.arouter = arouter
+
+def permissionsdispatcher = [:]
+permissionsdispatcher.api = "com.github.hotchemi:permissionsdispatcher:$versions.permissionsdispatcher"
+permissionsdispatcher.compiler = "com.github.hotchemi:permissionsdispatcher-processor:$versions.permissionsdispatcher"
+deps.permissionsdispatcher = permissionsdispatcher
+
+def autodispose = [:]
+autodispose.autodispose = "com.uber.autodispose:autodispose-kotlin:$versions.autodispose"
+autodispose.autodispose_android = "com.uber.autodispose:autodispose-android-kotlin:$versions.autodispose"
+autodispose.autodispose_android_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents-kotlin:$versions.autodispose"
+deps.autodispose = autodispose
+
+def anko = [:]
+anko.common = "org.jetbrains.anko:anko-commons:$versions.anko"
+anko.v4_commons = "org.jetbrains.anko:anko-support-v4-commons:$versions.anko"
+deps.anko = anko
+
+
+deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+deps.logger = "com.orhanobut:logger:$versions.logger"
+deps.junit = "junit:junit:$versions.junit"
+deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.walle_plugin = "com.meituan.android.walle:plugin:$versions.walle"
+deps.walle = "com.meituan.android.walle:library:$versions.walle"
+deps.tinypinyin = "com.github.promeg:tinypinyin:$versions.tinypinyin"
+deps.loadmore = "cn.com.open:loadmore:$versions.loadmore"
+deps.slidingtab = "cn.com.open:slidingtab:$versions.slidingtab"
+deps.biding_recycler_view = "cn.com.open.mooc:databinding-recyclerview:$versions.biding_recycler_view"
+deps.load_retry_manager = "cn.com.open.mooc:loadingretrymanager:$versions.load_retry_manager"
+deps.hawk = "com.orhanobut:hawk:$versions.hawk"
+deps.bannerview = "cn.kevin:bannerview:$versions.bannerviewVer"
+deps.status_bar_compat = "com.githang:status-bar-compat:$versions.status_bar_compat"
+deps.refresh = "cn.com.open:refresh:$versions.refresh"
+deps.analytics = "com.umeng.analytics:analytics:$versions.analytics"
+deps.ucrop = "com.github.yalantis:ucrop:$versions.ucrop"
+deps.easyimage = "com.github.jkwiecien:EasyImage:$versions.easyimage"
+deps.zxing = "com.google.zxing:core:$versions.zxing"
+deps.android_pickerview = "com.contrarywind:Android-PickerView:$versions.android_pickerview"
+deps.compresshelper = "com.github.nanchen2251:CompressHelper:$versions.compresshelper"
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 17
+build_versions.target_sdk = 27
+build_versions.build_tools = "27.0.3"
+
+build_versions.applicationId = "cn.com.open.shuxiaotong"
+build_versions.versionCode = 1000
+build_versions.versionName = "1.0.0"
+
+
+
+build_versions.KEY_ALIAS = "shuxiaotong"
+build_versions.KEY_PASSWORD = "sxt&open"
+build_versions.STORE_FILE = "shuxiaotong.jks"
+build_versions.KEYSTORE_PASSWORD = "sxt&open"
+
+build_versions.ndk_build = false
+
+ext.build_versions = build_versions
+
+def work = [:]
+work.runtime = "android.arch.work:work-runtime:$versions.work"
+work.testing = "android.arch.work:work-testing:$versions.work"
+work.firebase = "android.arch.work:work-firebase:$versions.work"
+deps.work = work
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://jitpack.io' }
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url "http://10.96.141.45:8081/nexus/content/groups/Snapshots/" }
+//    handler.flatDir {
+//        dirs "../pay/libs".split(",")
+//    }
+}
+ext.addRepos = this.&addRepos
