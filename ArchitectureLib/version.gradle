@@ -131,8 +131,7 @@ deps.walle = "com.meituan.android.walle:library:$versions.walle"
 deps.tinypinyin = "com.github.promeg:tinypinyin:$versions.tinypinyin"
 deps.loadmore = "cn.com.open:loadmore:$versions.loadmore"
 deps.slidingtab = "cn.com.open:slidingtab:$versions.slidingtab"
-deps.biding_recycler_view = "cn.com.open.mooc:databinding-recyclerview:$versions.biding_recycler_view"
-deps.load_retry_manager = "cn.com.open.mooc:loadingretrymanager:$versions.load_retry_manager"
+
 deps.hawk = "com.orhanobut:hawk:$versions.hawk"
 deps.bannerview = "cn.kevin:bannerview:$versions.bannerviewVer"
 deps.status_bar_compat = "com.githang:status-bar-compat:$versions.status_bar_compat"
@@ -178,7 +177,6 @@ def addRepos(RepositoryHandler handler) {
     handler.jcenter()
     handler.maven { url 'https://jitpack.io' }
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    handler.maven { url "http://10.96.141.45:8081/nexus/content/groups/Snapshots/" }
 //    handler.flatDir {
 //        dirs "../pay/libs".split(",")
 //    }
