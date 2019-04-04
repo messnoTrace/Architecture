@@ -34,7 +34,7 @@ versions.biding_recycler_view = "1.0.3"
 versions.load_retry_manager = "1.0.1"
 versions.hawk = "2.0.1"
 versions.status_bar_compat = "0.7"
-versions.bannerviewVer="1.0.8"
+versions.bannerviewVer = "1.0.8"
 versions.refresh = "1.0.3"
 versions.player = "1.0.3.1-SNAPSHOT"
 versions.analytics = "6.1.4"
@@ -45,8 +45,20 @@ versions.easyimage = "2.1.0"
 versions.zxing = "3.3.3"
 versions.android_pickerview = "4.1.6"
 versions.compresshelper = "1.0.5"
+versions.annotationVersion = "1.1.0-alpha01"
+versions.recyclerviewVersion = "1.0.0"
+versions.dokkaVersion = '0.9.17'
+versions.smartrefreshlayout = '1.1.0-andx-4'
 def deps = [:]
 
+def smartRefreshlayout = [:]
+smartRefreshlayout.refreshlayout = "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartrefreshlayout"
+smartRefreshlayout.refreshHeader = "com.scwang.smartrefresh:SmartRefreshHeader:$versions.smartrefreshlayout"
+deps.smartRefreshlayout = smartRefreshlayout
+def androidx = [:]
+androidx.annotation = "androidx.annotation:annotation:$versions.annotationVersion"
+androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerviewVersion"
+deps.androidx = androidx
 def support = [:]
 support.annotations = "com.android.support:support-annotations:$versions.support"
 support.app_compat = "com.android.support:appcompat-v7:$versions.support"
@@ -176,4 +188,5 @@ def addRepos(RepositoryHandler handler) {
 //        dirs "../pay/libs".split(",")
 //    }
 }
+
 ext.addRepos = this.&addRepos

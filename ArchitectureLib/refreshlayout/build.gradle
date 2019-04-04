@@ -2,11 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion build_versions.target_sdk
-
-
 
     defaultConfig {
         minSdkVersion build_versions.min_sdk
@@ -25,26 +22,23 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
-    implementation deps.support.annotations
-    implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
-    implementation deps.okhttp_logging_interceptor
-    implementation deps.rxjava2
-    implementation deps.logger
-    implementation deps.rx_android
-    implementation deps.paging
-    implementation deps.kotlin.stdlib
-    implementation deps.rxjava2
-    implementation deps.rx_android
-    implementation deps.lifecycle.extensions
-    kapt deps.lifecycle.compiler
+    api deps.smartRefreshlayout.refreshlayout
+    api deps.smartRefreshlayout.refreshHeader
+    implementation deps.support.recyclerview
     implementation project(':multytype')
-}
-repositories {
-    mavenCentral()
+    implementation project(':network')
 }

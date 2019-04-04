@@ -1,2 +1,9 @@
 # Architecture
 Architecture for develop
+
+这个库是目前项目中基于mvvm和databiding做的一些封装和总结
+先介绍下各个module的作用
+multytype： 多种类型的item的recycleview，基于大佬github
+https://github.com/drakeet/MultiType
+network：基于okhttp和rxjava做的一些封装
+refreshlayout：基于smartrefreshlayout做的一些databing操作，以及自己实现的loadMoreRecycleview的databinding操作
