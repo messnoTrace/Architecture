@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+>
+    <data>
+        <import type="com.notrace.refreshlayout.ListUtils"/>
+        <import type="com.notrace.network.mvvm.Status"/>
+        <variable name="viewModel" type="com.notrace.architecturelib.loadmore.LoadMoreViewModel"/>
+
+    </data>
+    <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    >
+
+        <!--
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:layout_width="match_parent"
+                app:srlEnableLoadMore="false"
+                android:layout_height="wrap_content"
+                app:onRefreshListener="@{viewModel.refreshEvent}"
+                app:aotuRefresh="@{viewModel.refresh}"
+                app:refreshFinish="@{viewModel.networkState().status != Status.RUNNING}"
+                app:loadMoreListener="@{viewModel.loadMore}"
+                app:noMoreData="@{viewModel.loadEnd()}"
+                app:netState="@{@{viewModel.networkState()}">
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+                -->
+
+        <com.notrace.refreshlayout.loadmore.LoadMoreRecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:emptyState="@{ListUtils.isEmptyInitFalse(viewModel.items)}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:loadEnd="@{viewModel.loadEnd(false)}"
+                    app:bindingHolders="@{viewModel.holder}"
+                    app:items="@{viewModel.mutableItems}"
+                    app:loadMore="@{viewModel.loadMore}"
+                    app:netState="@{viewModel.networkState()}"
+                    app:retryCallback="@{viewModel.retry}"
+                    app:retryState="@{viewModel.initNetError()}"/>
+
+    </LinearLayout>
+</layout>

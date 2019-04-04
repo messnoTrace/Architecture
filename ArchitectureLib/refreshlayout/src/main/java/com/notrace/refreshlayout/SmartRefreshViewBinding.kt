@@ -17,8 +17,8 @@ import java.util.ArrayList
 /**
  * 刷新
  */
-@BindingAdapter(value = ["onRefreshListener"])
-fun SmartRefreshLayout.setRefreshListener(invoke: Function0<Any>) {
+@BindingAdapter(value = ["refreshListener"],requireAll = true)
+fun SmartRefreshLayout.refreshListener(invoke: Function0<Any>) {
     setOnRefreshListener {
         invoke.invoke()
     }
@@ -28,7 +28,7 @@ fun SmartRefreshLayout.setRefreshListener(invoke: Function0<Any>) {
 /**
  * 刷新完成
  */
-@BindingAdapter(value = ["refreshFinish"])
+@BindingAdapter(value = ["refreshFinish"],requireAll = true)
 fun SmartRefreshLayout.refreshFinish(finishRefresh: Boolean) {
     if (finishRefresh) {
         finishRefresh(true)
@@ -38,7 +38,7 @@ fun SmartRefreshLayout.refreshFinish(finishRefresh: Boolean) {
 /**
  * 自动刷新
  */
-@BindingAdapter(value = ["aotuRefresh"])
+@BindingAdapter(value = ["aotuRefresh"],requireAll = true)
 fun SmartRefreshLayout.aotuRefresh(refresh: Boolean) {
     if (refresh) {
         autoRefresh()
@@ -48,7 +48,7 @@ fun SmartRefreshLayout.aotuRefresh(refresh: Boolean) {
 /**
  * 加载更多
  */
-@BindingAdapter(value = ["loadMoreListener"])
+@BindingAdapter(value = ["loadMoreListener"],requireAll = true)
 fun SmartRefreshLayout.setLoadMoreListener(invoke: Function0<Any>) {
     setOnLoadMoreListener {
         invoke.invoke()
@@ -56,12 +56,12 @@ fun SmartRefreshLayout.setLoadMoreListener(invoke: Function0<Any>) {
 }
 
 
-@BindingAdapter(value = ["noMoreData"], requireAll = false)
+@BindingAdapter(value = ["noMoreData"], requireAll = true)
 fun SmartRefreshLayout.noMoreData(noMoreData: Boolean) {
     finishLoadMore(noMoreData)
 }
 
-@BindingAdapter(value = ["netState"], requireAll = false)
+@BindingAdapter(value = ["netState"], requireAll = true)
 fun SmartRefreshLayout.netState(state: NetworkState?) {
     state?.run {
         when (status) {
@@ -73,7 +73,7 @@ fun SmartRefreshLayout.netState(state: NetworkState?) {
     }
 }
 
-@BindingAdapter(value = ["bindingHolders", "items"])
+@BindingAdapter(value = ["bindingHolders", "items"],requireAll = true)
 fun <T> RecyclerView.setItems(bindingHolder: ItemBindingHolder?, data: List<T>?) {
     if (bindingHolder == null) {
         throw IllegalArgumentException("itemBinding must not be null")

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LoadingAndRetry</string>
+    <string name="no_network_retry">您的网络开了小差，请点击屏幕重试</string>
+</resources>

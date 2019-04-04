@@ -22,8 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-
     dataBinding {
         enabled = true
     }
@@ -33,12 +31,13 @@ android {
     }
 
 
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin.stdlib
-    api deps.androidx.annotation
+    implementation deps.support.annotations
     implementation deps.support.recyclerview
 
 }

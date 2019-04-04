@@ -15,6 +15,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
 
     }
 
@@ -25,26 +27,21 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api deps.kotlin.stdlib
-    api deps.support.annotations
-    api deps.retrofit.runtime
-    api deps.retrofit.gson
-    api deps.okhttp_logging_interceptor
-    api deps.rxjava2
-    api deps.logger
-    api deps.rx_android
-    api deps.paging
-    api deps.kotlin.stdlib
-    api deps.rxjava2
-    api deps.rx_android
-    api deps.lifecycle.extensions
-    kapt deps.lifecycle.compiler
-    api project(':multytype')
-}
-repositories {
-    mavenCentral()
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.kotlin.stdlib
+    implementation deps.support.recyclerview
+    implementation deps.support.app_compat
 }

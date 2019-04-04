@@ -1,1 +1,1 @@
-include ':app', ':network', ':multytype', ':refreshlayout'
+include ':app', ':network', ':multytype', ':refreshlayout', ':loadingandretry'

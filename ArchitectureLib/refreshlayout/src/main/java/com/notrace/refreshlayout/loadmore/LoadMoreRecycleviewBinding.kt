@@ -11,12 +11,13 @@ import java.util.ArrayList
  * 对LoadMoreRecyclerView的一些操作做绑定
  * *create by chenyang on 2019/4/4
  */
+
 @BindingAdapter(value = ["loadMoreListener"], requireAll = false)
 fun LoadMoreRecyclerView.onLoadMore(loadMore: Function0<Any>) {
     setLoadMoreListener({ loadMore.invoke() })
 }
 
-@BindingAdapter(value = ["noMoreData"], requireAll = false)
+@BindingAdapter(value = ["loadEnd"], requireAll = false)
 fun LoadMoreRecyclerView.noMoreData(noMoreData: Boolean) {
     if (noMoreData) {
         noMoreData()

@@ -31,7 +31,7 @@ object ServiceFactory {
     private var retrofit: Retrofit
     private val commonParameters: MutableMap<String, () -> String> = HashMap()
 
-    private val baseUrl = ""
+    private var baseUrl = ""
 
     init {
         retrofit = Retrofit.Builder()

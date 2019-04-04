@@ -20,7 +20,7 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  *create by chenyang on 2019/4/3
  **/
-open abstract class ListViewModel<T> : ViewModel() {
+abstract class ListViewModel<T> : ViewModel() {
 
     private var firstTime = true
 
