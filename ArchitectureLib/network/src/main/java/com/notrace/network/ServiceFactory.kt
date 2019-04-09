@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 object ServiceFactory {
     val gson by lazy {
         GsonBuilder().registerTypeAdapter(EmptyEntity::class.java, EmptyTypeAdapter())
-            .registerTypeAdapter(ServerResponse::class.java, ServerResponseTypeAdapter())
+            .registerTypeAdapter(ServerResponse::class.java, ServerResponseTypeAdapter(false))
             .registerTypeAdapter(Boolean::class.java, BooleanTypeAdapter())
             .registerTypeAdapter(Int::class.java, IntZeroAdapter())
             .create()
@@ -31,19 +31,19 @@ object ServiceFactory {
     private var retrofit: Retrofit
     private val commonParameters: MutableMap<String, () -> String> = HashMap()
 
-    private var baseUrl = ""
+    private var baseUrl = "https://api.github.com/"
 
     init {
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(
-                RxJava2CallAdapterFactory.createWithScheduler(
-                    ServerResponse::class.java,
-                    Schedulers.io()
+                RxJava2CallAdapterFactory.create(
+                    ServerResponse::class.java
+
                 )
             )
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(String::class.java, Schedulers.io()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create(String::class.java))
             .client(initClient())
             .build()
 

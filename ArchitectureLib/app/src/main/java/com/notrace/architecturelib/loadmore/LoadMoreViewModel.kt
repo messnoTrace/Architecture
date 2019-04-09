@@ -1,9 +1,12 @@
 package com.notrace.architecturelib.loadmore
 
 import android.arch.lifecycle.MutableLiveData
+import com.notrace.architecturelib.R
 import com.notrace.architecturelib.data.model.Repo
 import com.notrace.architecturelib.inject.GithubDataSourceInject
+import com.notrace.multytype.BR
 import com.notrace.multytype.ItemBindingHolder
+import com.notrace.multytype.ItemViewBinder
 import com.notrace.network.mvvm.viewmodel.ListViewModel
 import com.notrace.network.rx.CommonSingleObsever
 import io.reactivex.Single
@@ -24,11 +27,14 @@ class LoadMoreViewModel : ListViewModel<Repo>() {
 
     override fun convert(list: List<Repo>): List<Any> {
 
-        return list
+        var mutableList = mutableListOf<Any>()
+        mutableList.addAll(list)
+        return mutableList
     }
 
     override fun registerHolder(holder: ItemBindingHolder) {
 
+        holder.register(Repo::class.java, ItemViewBinder(BR.item, R.layout.item_repo))
     }
 
     override fun provideData(): (page: Int) -> Single<List<Repo>> {

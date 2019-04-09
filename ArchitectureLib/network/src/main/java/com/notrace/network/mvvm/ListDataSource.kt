@@ -43,8 +43,8 @@ class ListDataSource<T>(
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, T>) {
 
-        networkState.postValue(NetworkState.LOADED)
-        initialLoad.postValue(NetworkState.LOADED)
+        networkState.postValue(NetworkState.LOADING)
+        initialLoad.postValue(NetworkState.LOADING)
 
         compositeDisposable.add(
             remoteData.invoke(1)

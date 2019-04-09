@@ -2,8 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion build_versions.target_sdk
+
+
 
     defaultConfig {
         minSdkVersion build_versions.min_sdk
@@ -11,31 +14,31 @@ android {
         versionCode 1
         versionName "1.0"
 
-    }
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+    }
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.support.recyclerview
-    api deps.smartRefreshlayout.refreshlayout
-    api deps.smartRefreshlayout.refreshHeader
+    implementation project(':loadingandretry')
     implementation project(':multytype')
-    implementation project(':network')
+    implementation project(':refreshlayout')
     implementation deps.support.app_compat
-    api deps.kotlin.stdlib
-
+    implementation deps.kotlin.stdlib
+    implementation project(':network')
 }

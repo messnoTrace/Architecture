@@ -46,7 +46,7 @@ abstract class ListViewModel<T> : ViewModel() {
     fun loadData() {
         val config = PagedList.Config.Builder()
             .setPageSize(10)
-            .setInitialLoadSizeHint(20 * 2)
+            .setInitialLoadSizeHint(20)
             .setEnablePlaceholders(false)
             .build()
 
@@ -107,14 +107,14 @@ abstract class ListViewModel<T> : ViewModel() {
 
 
     fun refresh() {
-        sourceFactory.listDataSource.value!!.initialLoad
+        sourceFactory.listDataSource.value!!.invalidate()
     }
 
     fun retry() {
         sourceFactory.listDataSource.value!!.retry()
     }
 
-    fun loadEnd(): LiveData<Boolean> =
+    public fun loadEnd(): LiveData<Boolean> =
         Transformations.switchMap<com.notrace.network.mvvm.ListDataSource<T>, Boolean>(sourceFactory.listDataSource) {
             Transformations.map(
                 it.networkState
@@ -122,7 +122,9 @@ abstract class ListViewModel<T> : ViewModel() {
         }
 
     fun networkState(): LiveData<NetworkState> = Transformations.switchMap<ListDataSource<T>, NetworkState>(
-        sourceFactory.listDataSource, { it.networkState }
+        sourceFactory.listDataSource, {
+            it.networkState
+        }
     )
 
     fun initNetError(): LiveData<Boolean> = Transformations.switchMap<ListDataSource<T>, Boolean>(
@@ -130,7 +132,11 @@ abstract class ListViewModel<T> : ViewModel() {
         {
             Transformations.map(
                 it.initialLoad,
-                { it.status == Status.FAILED && it.throwable != null && it.throwable.netError() })
+                {
+                    it.status == Status.FAILED
+                            && it.throwable != null
+                            && it.throwable.netError()
+                })
         }
     )
 

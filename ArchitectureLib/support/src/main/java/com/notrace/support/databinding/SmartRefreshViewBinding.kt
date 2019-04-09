@@ -1,4 +1,4 @@
-package com.notrace.refreshlayout
+package com.notrace.support.databinding
 
 import android.databinding.BindingAdapter
 import android.support.v7.widget.RecyclerView
@@ -17,8 +17,8 @@ import java.util.ArrayList
 /**
  * 刷新
  */
-@BindingAdapter(value = ["refreshListener"],requireAll = true)
-fun SmartRefreshLayout.refreshListener(invoke: Function0<Any>) {
+@BindingAdapter(value = ["refresh"], requireAll = false)
+fun SmartRefreshLayout.refresh(invoke: Function0<Any>) {
     setOnRefreshListener {
         invoke.invoke()
     }
@@ -28,7 +28,7 @@ fun SmartRefreshLayout.refreshListener(invoke: Function0<Any>) {
 /**
  * 刷新完成
  */
-@BindingAdapter(value = ["refreshFinish"],requireAll = true)
+@BindingAdapter(value = ["refreshFinish"], requireAll = false)
 fun SmartRefreshLayout.refreshFinish(finishRefresh: Boolean) {
     if (finishRefresh) {
         finishRefresh(true)
@@ -38,8 +38,8 @@ fun SmartRefreshLayout.refreshFinish(finishRefresh: Boolean) {
 /**
  * 自动刷新
  */
-@BindingAdapter(value = ["aotuRefresh"],requireAll = true)
-fun SmartRefreshLayout.aotuRefresh(refresh: Boolean) {
+@BindingAdapter(value = ["callRefreshAuto"], requireAll = false)
+fun SmartRefreshLayout.callRefresh(refresh: Boolean) {
     if (refresh) {
         autoRefresh()
     }
@@ -48,20 +48,20 @@ fun SmartRefreshLayout.aotuRefresh(refresh: Boolean) {
 /**
  * 加载更多
  */
-@BindingAdapter(value = ["loadMoreListener"],requireAll = true)
-fun SmartRefreshLayout.setLoadMoreListener(invoke: Function0<Any>) {
+@BindingAdapter(value = ["loadMoreListener"], requireAll = false)
+fun SmartRefreshLayout.loadMore(invoke: Function0<Any>) {
     setOnLoadMoreListener {
         invoke.invoke()
     }
 }
 
 
-@BindingAdapter(value = ["noMoreData"], requireAll = true)
+@BindingAdapter(value = ["noMoreData"], requireAll = false)
 fun SmartRefreshLayout.noMoreData(noMoreData: Boolean) {
     finishLoadMore(noMoreData)
 }
 
-@BindingAdapter(value = ["netState"], requireAll = true)
+@BindingAdapter(value = ["netState"], requireAll = false)
 fun SmartRefreshLayout.netState(state: NetworkState?) {
     state?.run {
         when (status) {
@@ -73,7 +73,7 @@ fun SmartRefreshLayout.netState(state: NetworkState?) {
     }
 }
 
-@BindingAdapter(value = ["bindingHolders", "items"],requireAll = true)
+@BindingAdapter(value = ["bindingHolders", "bindingItems"], requireAll = false)
 fun <T> RecyclerView.setItems(bindingHolder: ItemBindingHolder?, data: List<T>?) {
     if (bindingHolder == null) {
         throw IllegalArgumentException("itemBinding must not be null")

@@ -41,4 +41,7 @@ dependencies {
     implementation project(':network')
     implementation project(':refreshlayout')
     implementation project(':loadingandretry')
+    implementation project(':support')
+    implementation deps.support.cardview
+    implementation deps.constraint_layout
 }

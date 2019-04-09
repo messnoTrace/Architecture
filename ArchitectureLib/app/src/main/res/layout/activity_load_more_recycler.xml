@@ -7,43 +7,52 @@
     <data>
         <import type="com.notrace.refreshlayout.ListUtils"/>
         <import type="com.notrace.network.mvvm.Status"/>
+        <import type="android.view.View"/>
         <variable name="viewModel" type="com.notrace.architecturelib.loadmore.LoadMoreViewModel"/>
 
     </data>
-    <LinearLayout
+    <FrameLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
     >
 
-        <!--
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:layout_width="match_parent"
                 app:srlEnableLoadMore="false"
-                android:layout_height="wrap_content"
-                app:onRefreshListener="@{viewModel.refreshEvent}"
-                app:aotuRefresh="@{viewModel.refresh}"
+                android:layout_height="match_parent"
+                app:callRefreshAuto="@{viewModel.refreshEvent}"
+                app:refresh="@{viewModel.refresh}"
+                app:retryCallback="@{viewModel.retry}"
+                app:emptyState="@{ListUtils.isEmptyInitFalse(viewModel.items)}"
+                app:retryState="@{viewModel.initNetError()}"
                 app:refreshFinish="@{viewModel.networkState().status != Status.RUNNING}"
-                app:loadMoreListener="@{viewModel.loadMore}"
-                app:noMoreData="@{viewModel.loadEnd()}"
-                app:netState="@{@{viewModel.networkState()}">
+                app:netState="@{viewModel.networkState()}"
 
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-                -->
 
-        <com.notrace.refreshlayout.loadmore.LoadMoreRecyclerView
+        >
+
+
+            <com.notrace.refreshlayout.loadmore.LoadMoreRecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:emptyState="@{ListUtils.isEmptyInitFalse(viewModel.items)}"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                    app:loadEnd="@{viewModel.loadEnd(false)}"
-                    app:bindingHolders="@{viewModel.holder}"
-                    app:items="@{viewModel.mutableItems}"
-                    app:loadMore="@{viewModel.loadMore}"
-                    app:netState="@{viewModel.networkState()}"
-                    app:retryCallback="@{viewModel.retry}"
-                    app:retryState="@{viewModel.initNetError()}"/>
 
-    </LinearLayout>
+                    app:loadEnd="@{viewModel.loadEnd()}"
+                    app:loadMoreListener="@{viewModel.loadMore}"
+                    app:bindingHolders="@{viewModel.holder}"
+                    app:bindingItems="@{viewModel.mutableItems}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <ProgressBar
+                android:visibility="@{viewModel.loading()? View.VISIBLE : View.GONE}"
+                android:indeterminate="false"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+    </FrameLayout>
 </layout>

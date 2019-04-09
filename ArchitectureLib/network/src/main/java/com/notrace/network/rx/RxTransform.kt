@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  *create by chenyang on 2019/4/2
  **/
-class RxTransform {
+object RxTransform {
     fun <T> singleIOMain(): SingleTransformer<T, T> {
         return SingleTransformer<T, T> {
             it.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
