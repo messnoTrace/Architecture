@@ -60,7 +60,6 @@ abstract class ListViewModel<T> : ViewModel() {
                         else -> convert(it)
                     }
                 }.let {
-                    items.value = it
                     items.postValue(it)
                     mutableList.clear()
                     beforeItems.value?.run {
