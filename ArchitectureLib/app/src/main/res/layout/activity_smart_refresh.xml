@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:bindingHolders="@{viewModel.holder}"
-                    app:bindingItems="@{viewModel.mutableItems}"
+                    app:bindingItems="@{viewModel.items}"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             />
 

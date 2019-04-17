@@ -42,7 +42,7 @@
                     app:loadEnd="@{viewModel.loadEnd()}"
                     app:loadMoreListener="@{viewModel.loadMore}"
                     app:bindingHolders="@{viewModel.holder}"
-                    app:bindingItems="@{viewModel.mutableItems}"
+                    app:bindingItems="@{viewModel.items}"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         />
 

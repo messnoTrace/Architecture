@@ -7,14 +7,14 @@ import com.notrace.architecturelib.inject.GithubDataSourceInject
 import com.notrace.multytype.BR
 import com.notrace.multytype.ItemBindingHolder
 import com.notrace.multytype.ItemViewBinder
-import com.notrace.network.mvvm.viewmodel.ListViewModel
+import com.notrace.network.mvvm.viewmodel.MultableDataSourceViewModel
 import com.notrace.network.rx.CommonSingleObsever
 import io.reactivex.Single
 
 /**
  *create by chenyang on 2019/4/4
  **/
-class SmartRfreshViewModel : ListViewModel<Repo>() {
+class SmartRfreshViewModel : MultableDataSourceViewModel<Repo>() {
 
     init {
 

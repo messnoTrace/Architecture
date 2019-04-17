@@ -19,8 +19,10 @@ import io.reactivex.disposables.CompositeDisposable
 
 /**
  *create by chenyang on 2019/4/3
+ *
+ * 多种数据源viewmodel 没写完
  **/
-abstract class ListViewModel<T> : ViewModel() {
+abstract class MultableDataSourceViewModel<T> : ViewModel() {
 
     private var firstTime = true
 
@@ -30,8 +32,8 @@ abstract class ListViewModel<T> : ViewModel() {
     val refreshEvent = MutableLiveData<Boolean>()
     lateinit var designList: LiveData<PagedList<T>>
 
-    var items = MutableLiveData<List<Any>>()
-    var beforeItems = MutableLiveData<MutableList<Any>>()
+    var items = MutableLiveData<List<Any>>()//正常一个数据源用这个
+    var beforeItems = MutableLiveData<MutableList<Any>>()//多个数据源
     private var mutableList = mutableListOf<Any>()
     var mutableItems = MutableLiveData<MutableList<Any>>()
     val holder = ItemBindingHolder()

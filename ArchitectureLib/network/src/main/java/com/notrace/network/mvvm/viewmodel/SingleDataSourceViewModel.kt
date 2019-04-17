@@ -21,9 +21,11 @@ import io.reactivex.schedulers.Schedulers
 
 /**
  *create by chenyang on 2019/4/9
+ *
+ * 单个数据源viewmodel 没写完
  **/
 
-open abstract class FetchViewModel<T>(autoFetch:Boolean = true) : ViewModel() {
+open abstract class SingleDataSourceViewModel<T>(autoFetch:Boolean = true) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     /**
@@ -84,7 +86,7 @@ open abstract class FetchViewModel<T>(autoFetch:Boolean = true) : ViewModel() {
             compositeDisposable.add(retryCompletable!!
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ }, { throwable -> Log.e("FetchViewModel", throwable.message) }))
+                .subscribe({ }, { throwable -> Log.e("SingleDataSourceViewModel", throwable.message) }))
         }
     }
 
