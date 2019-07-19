@@ -24,7 +24,7 @@
                 app:callRefreshAuto="@{viewModel.refreshEvent}"
                 app:refresh="@{viewModel.refresh}"
                 app:retryCallback="@{viewModel.retry}"
-                app:emptyState="@{ListUtils.isEmptyInitFalse(viewModel.items)}"
+                app:emptyState="@{ListUtils.isEmptyInitFalse(viewModel.data)}"
                 app:retryState="@{viewModel.initNetError()}"
                 app:refreshFinish="@{viewModel.networkState().status != Status.RUNNING}"
                 app:noMoreData="@{viewModel.loadEnd()}"
@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:bindingHolders="@{viewModel.holder}"
-                    app:bindingItems="@{viewModel.items}"
+                    app:bindingItems="@{viewModel.data}"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             />
 

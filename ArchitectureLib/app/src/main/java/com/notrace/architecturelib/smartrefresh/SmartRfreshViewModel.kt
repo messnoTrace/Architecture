@@ -8,13 +8,25 @@ import com.notrace.multytype.BR
 import com.notrace.multytype.ItemBindingHolder
 import com.notrace.multytype.ItemViewBinder
 import com.notrace.network.mvvm.viewmodel.MultableDataSourceViewModel
+import com.notrace.network.mvvm.viewmodel.PageViewModel
 import com.notrace.network.rx.CommonSingleObsever
 import io.reactivex.Single
 
 /**
  *create by chenyang on 2019/4/4
  **/
-class SmartRfreshViewModel : MultableDataSourceViewModel<Repo>() {
+class SmartRfreshViewModel : PageViewModel<Repo>() {
+    override fun privideSourceData(): (page: Int) -> Single<List<Repo>> {
+
+        return {
+            page->
+            searchRepoByPage("google", page)
+        }
+    }
+
+    override fun convertData(source: List<Repo>): List<Any> {
+        return source
+    }
 
     init {
 
@@ -25,23 +37,12 @@ class SmartRfreshViewModel : MultableDataSourceViewModel<Repo>() {
 
     }
 
-    override fun convert(list: List<Repo>): List<Any> {
-
-        var mutableList = mutableListOf<Any>()
-        mutableList.addAll(list)
-        return mutableList
-    }
 
     override fun registerHolder(holder: ItemBindingHolder) {
 
         holder.register(Repo::class.java, ItemViewBinder(BR.item, R.layout.item_repo))
     }
 
-    override fun provideData(): (page: Int) -> Single<List<Repo>> {
-        return { page ->
-            searchRepoByPage("google", page)
-        }
-    }
 
     var toastMessage = MutableLiveData<String>()
 
@@ -66,7 +67,6 @@ class SmartRfreshViewModel : MultableDataSourceViewModel<Repo>() {
                 }
 
                 override fun onSuccess(t: MutableList<Any>) {
-                    beforeItems.value = t
                     loadData()
                 }
             })
