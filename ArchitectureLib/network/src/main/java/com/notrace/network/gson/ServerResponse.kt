@@ -12,7 +12,7 @@ data class ServerResponse<T>(
     @field:SerializedName("message")
     val message: String,
     @field:SerializedName("data")
-    val data: T,
+    val data: T?,
     @field:SerializedName("timestamp")
     val timestamp: Long
 )
