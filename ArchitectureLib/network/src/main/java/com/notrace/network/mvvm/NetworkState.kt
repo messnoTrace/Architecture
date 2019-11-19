@@ -1,15 +1,13 @@
 package com.notrace.network.mvvm
 
+import com.notrace.network.mvvm.base.Status
+
 /**
  *create by chenyang on 2019/4/2
  **/
 
 
-enum class Status {
-    RUNNING,
-    SUCCESS,
-    FAILED
-}
+
 
 @Suppress("DataClassPrivateConstructor")
 data class NetworkState private constructor(
