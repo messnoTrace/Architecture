@@ -16,6 +16,7 @@
                   <NAME>xmlns:android</NAME>
                   <XML_ATTRIBUTE />
                   <XML_NAMESPACE>^$</XML_NAMESPACE>
+                  
                 </AND>
               </match>
             </rule>
