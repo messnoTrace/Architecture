@@ -2,13 +2,17 @@ package com.notrace.network.mvvm.base
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.support.annotation.MainThread
+import android.support.annotation.WorkerThread
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 abstract class NetworkBoundResource<ResultType,RequestType>
-@MainThread constructor(val repository:IRepository){
-    private val result=MediatorLiveData<Resource<ResultType>>()
+@MainThread constructor(){
+    private val result= MediatorLiveData<Resource<ResultType>>()
     init {
 
-        result.value=Resource.loading(null)
+        result.value= Resource.loading(null)
 
         @Suppress("LeakingThis")
         val localSource = loadFromLocal()
@@ -24,6 +28,14 @@ abstract class NetworkBoundResource<ResultType,RequestType>
         }
     }
 
+    @MainThread
+    private fun setValue(newValue: Resource<ResultType>) {
+        if (result.value != newValue) {
+            result.value = newValue
+        }
+    }
+
+
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
         val apiResponse = createCall()
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
@@ -35,27 +47,28 @@ abstract class NetworkBoundResource<ResultType,RequestType>
             result.removeSource(dbSource)
             when (response) {
                 is ApiSuccessResponse -> {
-                    appExecutors.diskIO().execute {
+
+                    Schedulers.io().scheduleDirect {
                         saveCallResult(processResponse(response))
-                        appExecutors.mainThread().execute {
+                        AndroidSchedulers.mainThread().scheduleDirect {
                             // we specially request a new live data,
                             // otherwise we will get immediately last cached value,
                             // which may not be updated with latest results received from network.
-                            result.addSource(loadFromDb()) { newData ->
+                            result.addSource(loadFromLocal()) { newData ->
                                 setValue(Resource.success(newData))
                             }
                         }
                     }
                 }
                 is ApiEmptyResponse -> {
-                    appExecutors.mainThread().execute {
+                    AndroidSchedulers.mainThread().scheduleDirect {
                         // reload from disk whatever we had
-                        result.addSource(loadFromDb()) { newData ->
+                        result.addSource(loadFromLocal()) { newData ->
                             setValue(Resource.success(newData))
                         }
                     }
                 }
-                is ApiErrorResponse -> {
+               is ApiErrorResponse -> {
                     onFetchFailed()
                     result.addSource(dbSource) { newData ->
                         setValue(Resource.error(response.errorMessage, newData))

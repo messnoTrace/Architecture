@@ -10,7 +10,7 @@ import com.notrace.multytype.ItemBindingHolder
 import com.notrace.network.mvvm.ListDataSource
 import com.notrace.network.mvvm.ListDataSourceFactory
 import com.notrace.network.mvvm.NetworkState
-import com.notrace.network.mvvm.Status
+import com.notrace.network.mvvm.base.Status
 import com.notrace.network.util.netError
 import com.notrace.network.util.noData
 import com.notrace.network.util.yes
