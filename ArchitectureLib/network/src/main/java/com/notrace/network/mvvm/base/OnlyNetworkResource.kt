@@ -15,6 +15,7 @@ constructor() {
         result.value = Resource.loading(null)
         val apiResponse = createCall()
         result.addSource(apiResponse) { response ->
+            //when response.code==success?ro失败
             when (response) {
                 is ApiSuccessResponse -> {
                     AndroidSchedulers.mainThread().scheduleDirect {
@@ -27,9 +28,10 @@ constructor() {
                         postValue(Resource.success(response.data))
                     }
                 }
-                is ApiEmptyResponse -> {
+                is ApiErrorResponse -> {
                     AndroidSchedulers.mainThread().scheduleDirect {
                         postValue(Resource.error(response.message, response.data))
+                        onFetchFailed()
                     }
                 }
 
@@ -50,6 +52,8 @@ constructor() {
     @MainThread
     protected abstract fun createCall(): LiveData<ApiResponse<ResultType>>
 
+    @MainThread
+    protected open fun onFetchFailed() {}
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 }
 

@@ -10,6 +10,8 @@ import retrofit2.Response
 import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
 
+//如果这个地方 CallAdapter<R, LiveData<ApiResponse<R>>>改成了  CallAdapter<R, LiveData<R>>OnlyNetworkResource
+//解析状态需要放在OnlyNetworkResource中处理
 class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, LiveData<ApiResponse<R>>> {
     override fun responseType(): Type {
         return responseType
