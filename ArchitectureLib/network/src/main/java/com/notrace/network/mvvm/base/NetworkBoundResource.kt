@@ -4,15 +4,17 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
+import com.notrace.network.util.AbsentLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-abstract class NetworkBoundResource<ResultType,RequestType>
-@MainThread constructor(){
-    private val result= MediatorLiveData<Resource<ResultType>>()
+abstract class NetworkBoundResource<ResultType, RequestType>
+@MainThread constructor() {
+    private val result = MediatorLiveData<Resource<ResultType>>()
+
     init {
 
-        result.value= Resource.loading(null)
+        result.value = Resource.loading(null)
 
         @Suppress("LeakingThis")
         val localSource = loadFromLocal()
@@ -68,10 +70,10 @@ abstract class NetworkBoundResource<ResultType,RequestType>
                         }
                     }
                 }
-               is ApiErrorResponse -> {
-                    onFetchFailed(response.errorMessage)
+                is ApiErrorResponse -> {
+                    onFetchFailed()
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.error(response.errorMessage, newData))
+                        setValue(Resource.error(response.message, newData))
                     }
                 }
             }
@@ -79,22 +81,23 @@ abstract class NetworkBoundResource<ResultType,RequestType>
     }
 
 
-
-    protected open fun onFetchFailed(message:String?) {}
+    protected open fun onFetchFailed() {}
 
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
     @WorkerThread
-    protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
+    protected open fun processResponse(response: ApiSuccessResponse<RequestType>?) = response?.data
 
     @WorkerThread
-    protected abstract fun saveCallResult(item: RequestType)
+    protected abstract fun saveCallResult(item: RequestType?)
 
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
     @MainThread
-    protected abstract fun loadFromLocal(): LiveData<ResultType>
+    protected open fun loadFromLocal(): LiveData<ResultType> {
+        return AbsentLiveData.create()
+    }
 
     @MainThread
     protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>

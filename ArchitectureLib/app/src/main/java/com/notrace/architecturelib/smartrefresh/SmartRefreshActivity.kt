@@ -11,6 +11,7 @@ import com.notrace.architecturelib.databinding.ActivitySmartRefreshBinding
 import com.notrace.network.API_CODE_EMPTY
 import com.notrace.network.exception.ApiException
 import com.notrace.network.mvvm.Status
+import com.notrace.network.mvvm.base.Status
 
 class SmartRefreshActivity : AppCompatActivity() {
 
