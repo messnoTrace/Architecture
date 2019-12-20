@@ -36,30 +36,30 @@ class LiveDataListDataSource<T>(
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
         networkState.postValue(NetworkState.LOADING)
         initialLoad.postValue(NetworkState.LOADING)
-        object :SimpleNetworkBoundResource<List<T>,List<T>>(){
-            override fun createCall(): LiveData<ApiResponse<List<T>>> {
-                return dataSource.invoke(1)
-            }
-
-            override fun processResponse(response: ApiSuccessResponse<List<T>>): List<T> {
-                networkState.postValue(NetworkState.LOADED)
-                initialLoad.postValue(NetworkState.LOADED)
-                callback.onResult(response.body,params.key - 1)
-                newDataArrived.postCall()
-                return super.processResponse(response)
-            }
-
-            override fun onFetchFailed(message:String?) {
-                super.onFetchFailed(message)
-                newDataArrived.postCall()
-                retry = {
-                    loadAfter(params,callback)
-                }
-                networkState.postValue(NetworkState.error(Throwable(message)))
-
-            }
-
-        }
+//        object :SimpleNetworkBoundResource<List<T>,List<T>>(){
+//            override fun createCall(): LiveData<ApiResponse<List<T>>> {
+//                return dataSource.invoke(1)
+//            }
+//
+//            override fun processResponse(response: ApiSuccessResponse<List<T>>): List<T> {
+//                networkState.postValue(NetworkState.LOADED)
+//                initialLoad.postValue(NetworkState.LOADED)
+//                callback.onResult(response.data,params.key - 1)
+//                newDataArrived.postCall()
+//                return super.processResponse(response)
+//            }
+//
+//            override fun onFetchFailed(message:String?) {
+//                super.onFetchFailed(message)
+//                newDataArrived.postCall()
+//                retry = {
+//                    loadAfter(params,callback)
+//                }
+//                networkState.postValue(NetworkState.error(Throwable(message)))
+//
+//            }
+//
+//        }
     }
 
 
@@ -73,30 +73,30 @@ class LiveDataListDataSource<T>(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
         networkState.postValue(NetworkState.LOADING)
 
-        object :SimpleNetworkBoundResource<List<T>,List<T>>(){
-            override fun createCall(): LiveData<ApiResponse<List<T>>> {
-                return dataSource.invoke(1)
-            }
-
-            override fun processResponse(response: ApiSuccessResponse<List<T>>): List<T> {
-                retry = null
-
-                networkState.postValue(NetworkState.LOADED)
-                callback.onResult(response.body, params.key + 1)
-                newDataArrived.postCall()
-                return super.processResponse(response)
-
-            }
-
-            override fun onFetchFailed(message:String?) {
-                super.onFetchFailed(message)
-                retry = {
-                    loadAfter(params, callback)
-                }
-                networkState.postValue(NetworkState.error(Throwable(message)))
-            }
-
-        }
+//        object :SimpleNetworkBoundResource<List<T>,List<T>>(){
+//            override fun createCall(): LiveData<ApiResponse<List<T>>> {
+//                return dataSource.invoke(1)
+//            }
+//
+//            override fun processResponse(response: ApiSuccessResponse<List<T>>): List<T> {
+//                retry = null
+//
+//                networkState.postValue(NetworkState.LOADED)
+//                callback.onResult(response.body, params.key + 1)
+//                newDataArrived.postCall()
+//                return super.processResponse(response)
+//
+//            }
+//
+//            override fun onFetchFailed(message:String?) {
+//                super.onFetchFailed(message)
+//                retry = {
+//                    loadAfter(params, callback)
+//                }
+//                networkState.postValue(NetworkState.error(Throwable(message)))
+//            }
+//
+//        }
 
     }
 
