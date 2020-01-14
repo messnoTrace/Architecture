@@ -1,7 +1,7 @@
 package com.notrace.network.mvvm
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.DataSource
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 

@@ -1,8 +1,8 @@
 package com.notrace.network.mvvm.base
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.support.annotation.MainThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.annotation.MainThread
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 

@@ -1,16 +1,15 @@
 package com.notrace.architecturelib.smartrefresh
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.notrace.architecturelib.R
 import com.notrace.architecturelib.databinding.ActivitySmartRefreshBinding
 import com.notrace.network.API_CODE_EMPTY
 import com.notrace.network.exception.ApiException
-import com.notrace.network.mvvm.Status
 import com.notrace.network.mvvm.base.Status
 
 class SmartRefreshActivity : AppCompatActivity() {

@@ -1,8 +1,8 @@
 package com.notrace.refreshlayout.loadingandretry
 
-import android.databinding.BindingAdapter
-import android.support.annotation.IntDef
-import android.support.v4.widget.NestedScrollView
+import androidx.databinding.BindingAdapter
+import androidx.annotation.IntDef
+import androidx.core.widget.NestedScrollView
 import android.view.View
 import android.view.ViewGroup
 import com.notrace.loadingandretry.R

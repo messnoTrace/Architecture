@@ -1,11 +1,13 @@
 package com.notrace.network.mvvm.base
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.notrace.network.util.AbsentLiveData
 
  abstract class SimpleNetworkBoundResource<ResultType,RequestType>:NetworkBoundResource<ResultType,RequestType>() {
-    override fun saveCallResult(item: RequestType) {
-    }
+
+     override fun saveCallResult(item: RequestType?) {
+
+     }
 
     override fun shouldFetch(data: ResultType?): Boolean {
         return true

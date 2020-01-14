@@ -1,7 +1,7 @@
 package com.notrace.network.mvvm
 
-import android.arch.lifecycle.LiveData
-import android.arch.paging.PagedList
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 
 /**
  *create by chenyang on 2019/4/2

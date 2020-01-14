@@ -1,14 +1,14 @@
 package com.notrace.network.mvvm.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import android.util.Log
 import com.notrace.network.API_CODE_NET_ERROR
 import com.notrace.network.exception.ApiException
 import com.notrace.network.mvvm.NetworkState
-import com.notrace.network.mvvm.Status
+import com.notrace.network.mvvm.base.Status
 import com.notrace.network.util.convert
 import com.notrace.network.util.netError
 import com.notrace.network.util.no

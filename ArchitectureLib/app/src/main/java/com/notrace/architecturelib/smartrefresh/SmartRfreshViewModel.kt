@@ -1,6 +1,6 @@
 package com.notrace.architecturelib.smartrefresh
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.notrace.architecturelib.R
 import com.notrace.architecturelib.data.model.Repo
 import com.notrace.architecturelib.inject.GithubDataSourceInject

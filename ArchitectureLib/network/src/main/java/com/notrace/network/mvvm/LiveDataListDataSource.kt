@@ -1,8 +1,8 @@
 package com.notrace.network.mvvm
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import com.notrace.network.mvvm.base.*
 import io.reactivex.schedulers.Schedulers
 

@@ -16,7 +16,7 @@
 
 package com.notrace.multytype
 
-import android.support.annotation.IntRange
+import androidx.annotation.IntRange
 
 
 /**

@@ -1,10 +1,10 @@
 package com.notrace.support.databinding
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import com.notrace.multytype.ItemBindingHolder
 import com.notrace.multytype.MultiTypeAdapter
 import com.notrace.network.mvvm.NetworkState
-import com.notrace.network.mvvm.Status
+import com.notrace.network.mvvm.base.Status
 import com.notrace.refreshlayout.loadmore.LoadMoreRecyclerView
 
 /**
@@ -21,7 +21,7 @@ public fun LoadMoreRecyclerView.onLoadMore(loadMore: Function0<Any>) {
     setLoadMoreListener({ loadMore.invoke() })
 }
 
-@BindingAdapter(value = "loadEnd", requireAll = false)
+@BindingAdapter(value = ["loadEnd"], requireAll = false)
 fun LoadMoreRecyclerView.noMoreData(noMoreData: Boolean) {
     if (noMoreData) {
         noMoreData()

@@ -16,13 +16,12 @@
 
 package com.notrace.multytype;
 
-import android.databinding.ViewDataBinding;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.databinding.ViewDataBinding;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.SparseArray;
-import com.notrace.multytype.MultiTypeAdapter;
 
 import java.util.List;
 
@@ -110,7 +109,7 @@ public class ItemViewBinder<T> {
      * @return The adapter position.
      * @since v2.3.5. If below v2.3.5, use {@link ViewHolder#getAdapterPosition()} instead.
      */
-    protected final int getPosition(@NonNull final ViewHolder holder) {
+    protected final int getPosition(@NonNull final RecyclerView.ViewHolder holder) {
         return holder.getAdapterPosition();
     }
 

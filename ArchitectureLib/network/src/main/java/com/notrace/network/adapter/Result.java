@@ -4,7 +4,7 @@ package com.notrace.network.adapter;
  * create by chenyang on 2019/4/2
  **/
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import retrofit2.Response;
 
 import java.io.IOException;

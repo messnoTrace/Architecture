@@ -1,6 +1,6 @@
 package com.notrace.multytype;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * An interface to link the items and binders by the classes of binders.

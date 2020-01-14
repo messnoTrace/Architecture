@@ -1,8 +1,7 @@
 package com.notrace.multytype;
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.CheckResult;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import static com.notrace.multytype.Preconditions.checkNotNull;

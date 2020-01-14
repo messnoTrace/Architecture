@@ -1,12 +1,13 @@
-package com.notrace.multytype;
+package com.notrace.support.multitype;
 
 import android.content.Context;
 import android.content.res.Resources;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
 import androidx.annotation.LayoutRes;
 
-class MissingVariableException extends IllegalStateException{
+public class MissingVariableException extends IllegalStateException {
     public MissingVariableException(ViewDataBinding binding, int bindingVariable, @LayoutRes int layoutRes) {
         super("Could not bind variable '" + getBindingVariableName(bindingVariable) + "' in layout '" + getLayoutName(binding, layoutRes) + "'");
     }

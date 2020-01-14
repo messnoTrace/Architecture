@@ -1,6 +1,6 @@
 package com.notrace.network.adapter
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.notrace.network.mvvm.base.ApiResponse
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

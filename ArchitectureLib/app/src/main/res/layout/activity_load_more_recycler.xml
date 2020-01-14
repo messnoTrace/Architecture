@@ -6,7 +6,7 @@
 >
     <data>
         <import type="com.notrace.refreshlayout.ListUtils"/>
-        <import type="com.notrace.network.mvvm.Status"/>
+        <import type="com.notrace.network.mvvm.base.Status"/>
         <import type="android.view.View"/>
         <variable name="viewModel" type="com.notrace.architecturelib.loadmore.LoadMoreViewModel"/>
 
@@ -43,7 +43,7 @@
                     app:loadMoreListener="@{viewModel.loadMore}"
                     app:bindingHolders="@{viewModel.holder}"
                     app:bindingItems="@{viewModel.items}"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>

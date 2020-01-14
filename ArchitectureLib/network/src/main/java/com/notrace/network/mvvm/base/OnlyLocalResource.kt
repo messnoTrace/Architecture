@@ -1,6 +1,6 @@
 package com.notrace.network.mvvm.base
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.notrace.network.util.AbsentLiveData
 
 

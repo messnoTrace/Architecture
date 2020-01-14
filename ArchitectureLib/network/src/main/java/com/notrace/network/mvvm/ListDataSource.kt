@@ -1,7 +1,7 @@
 package com.notrace.network.mvvm
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Single

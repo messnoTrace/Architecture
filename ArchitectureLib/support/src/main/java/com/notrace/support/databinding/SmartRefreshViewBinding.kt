@@ -1,11 +1,10 @@
 package com.notrace.support.databinding
 
-import android.databinding.BindingAdapter
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.notrace.multytype.ItemBindingHolder
 import com.notrace.multytype.MultiTypeAdapter
 import com.notrace.network.mvvm.NetworkState
-import com.notrace.network.mvvm.Status
 import com.notrace.network.mvvm.base.Status
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import java.util.ArrayList
