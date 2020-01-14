@@ -52,10 +52,11 @@ public class CommonConvertFactory extends Converter.Factory {
         @Override
         public T convert(@NotNull ResponseBody value) throws IOException {
             JsonReader jsonReader = null;
+            T result=null;
             try {
-                System.out.println("----value"+value.toString());
+//                System.out.println("----value"+value.string());
                 jsonReader = gson.newJsonReader(value.charStream());
-                T result = adapter.read(jsonReader);
+                 result = adapter.read(jsonReader);
                 if (result instanceof BaseHttpResult) {
                     BaseHttpResult baseHttpResult = (BaseHttpResult) result;
 
@@ -65,9 +66,14 @@ public class CommonConvertFactory extends Converter.Factory {
 
                 }
                 return result;
-            } finally {
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }finally {
                 jsonReader.close();
             }
+
+            return result;
         }
     }
 

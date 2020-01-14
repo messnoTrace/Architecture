@@ -1,5 +1,6 @@
 package com.notrace.network
 
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.notrace.network.adapter.CommonConvertFactory
 import com.notrace.network.adapter.LiveDataCallAdapterFactory
@@ -24,10 +25,13 @@ import java.util.concurrent.TimeUnit
  **/
 object ServiceFactory {
     val gson by lazy {
-        GsonBuilder().registerTypeAdapter(EmptyEntity::class.java, EmptyTypeAdapter())
+        GsonBuilder()
+            .registerTypeAdapter(EmptyEntity::class.java, EmptyTypeAdapter())
             .registerTypeAdapter(ServerResponse::class.java, ServerResponseTypeAdapter(false))
             .registerTypeAdapter(Boolean::class.java, BooleanTypeAdapter())
             .registerTypeAdapter(Int::class.java, IntZeroAdapter())
+            .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .setExclusionStrategies()
             .create()
     }
     private var retrofit: Retrofit
@@ -38,6 +42,7 @@ object ServiceFactory {
     init {
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
+            .addCallAdapterFactory( LiveDataCallAdapterFactory())
             .addCallAdapterFactory(
                 RxJava2CallAdapterFactory.create(
                     ServerResponse::class.java
@@ -45,9 +50,8 @@ object ServiceFactory {
                 )
             )
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create(String::class.java))
-            .addCallAdapterFactory( LiveDataCallAdapterFactory())
             .addConverterFactory(CommonConvertFactory.create(gson))
-//            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(gson))
 
             .client(initClient())
             .build()
