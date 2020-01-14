@@ -1,13 +1,15 @@
 package com.notrace.network.mvvm.base
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.notrace.network.util.AbsentLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+// ResultType: Type for the Resource data
+// RequestType: Type for the API response
 abstract class NetworkBoundResource<ResultType, RequestType>
 @MainThread constructor() {
     private val result = MediatorLiveData<Resource<ResultType>>()
@@ -73,7 +75,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                 is ApiErrorResponse -> {
                     onFetchFailed()
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.error(response.message, newData))
+                        setValue(Resource.error(response.msg, newData))
                     }
                 }
             }
@@ -86,10 +88,10 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
     @WorkerThread
-    protected open fun processResponse(response: ApiSuccessResponse<RequestType>?) = response?.data
+    protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.data!!
 
     @WorkerThread
-    protected abstract fun saveCallResult(item: RequestType?)
+    protected abstract fun saveCallResult(item: RequestType)
 
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean

@@ -54,7 +54,10 @@ fun SmartRefreshLayout.loadMore(invoke: Function0<Any>) {
         invoke.invoke()
     }
 }
-
+@BindingAdapter(value=["loadMoreFinish"],requireAll = false)
+fun SmartRefreshLayout.loadMoreFinish(loadMoreFinish:Boolean){
+    finishLoadMore(loadMoreFinish)
+}
 
 @BindingAdapter(value = ["noMoreData"], requireAll = false)
 fun SmartRefreshLayout.noMoreData(noMoreData: Boolean) {

@@ -1,6 +1,8 @@
 package com.notrace.architecturelib.data.remote
 
+import androidx.lifecycle.LiveData
 import com.notrace.architecturelib.data.model.RepoSearchResponse
+import com.notrace.network.mvvm.base.ApiResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -44,4 +46,6 @@ interface GithubService {
 
     @GET("search/repositories")
     fun searchRepos(@Query("q") query: String, @Query("page") page: Int):Single<RepoSearchResponse>
+    @GET("search/repositories")
+    fun serchRepos(@Query("q") query: String, @Query("page") page: Int):LiveData<ApiResponse<RepoSearchResponse>>
 }

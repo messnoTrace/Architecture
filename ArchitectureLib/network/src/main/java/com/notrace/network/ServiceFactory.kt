@@ -1,6 +1,8 @@
 package com.notrace.network
 
 import com.google.gson.GsonBuilder
+import com.notrace.network.adapter.CommonConvertFactory
+import com.notrace.network.adapter.LiveDataCallAdapterFactory
 import com.notrace.network.adapter.RxJava2CallAdapterFactory
 import com.notrace.network.gson.*
 import com.notrace.network.util.TimeUtils
@@ -36,7 +38,6 @@ object ServiceFactory {
     init {
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(
                 RxJava2CallAdapterFactory.create(
                     ServerResponse::class.java
@@ -44,6 +45,10 @@ object ServiceFactory {
                 )
             )
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create(String::class.java))
+            .addCallAdapterFactory( LiveDataCallAdapterFactory())
+            .addConverterFactory(CommonConvertFactory.create(gson))
+//            .addConverterFactory(GsonConverterFactory.create(gson))
+
             .client(initClient())
             .build()
 

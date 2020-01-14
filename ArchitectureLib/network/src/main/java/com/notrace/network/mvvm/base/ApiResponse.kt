@@ -1,44 +1,35 @@
 package com.notrace.network.mvvm.base
 
-import retrofit2.Response
+import java.io.Serializable
 
 const val SUCCESS = "SUCCESS"
 const val ERROR = "ERROR"
 
-open class ApiResponse< T> constructor(val code: String, val message: String, open val data: T?) {
+open class ApiResponse<T> constructor(
+    val code: String,
+    val msg: String,
+    open val data: T?
+) : Serializable {
 
 
     companion object {
-        fun <T> create(code: String, message: String): ApiErrorResponse<T> {
-            return ApiErrorResponse(code, message)
+        @JvmStatic
+        fun error(code: String, t: Throwable): ApiErrorResponse<Nothing> {
+            return ApiErrorResponse(code, t.message.orEmpty(), t)
         }
 
-        fun <T> create(response: Response<T>): ApiResponse<T> {
-//            return if (response.code == (SUCCESS)) {
-//
-//                ApiSuccessResponse(response.code, response.message, response.data)
-//            } else {
-//                //TODO 空是啥样？这里写个错误的
-//                ApiErrorResponse(response.code, response.message)
-//            }
-//            /**
-            return if (response.isSuccessful) {
-                val body = response.body() as ApiResponse<T>
-                ApiSuccessResponse(SUCCESS, SUCCESS, body.data)
-
-            } else {
-                val msg = response.errorBody()?.string()
-                val errorMsg = if (msg.isNullOrEmpty()) {
-                    response.message()
-                } else {
-                    msg
-                }
-                ApiErrorResponse(ERROR, errorMsg ?: "unknown error")
-            }
-
+        @JvmStatic
+        fun <T> success(code: String, msg: String, data: T?): ApiResponse<T> {
+            return if (data == null)
+                ApiEmptyResponse(code, msg)
+            else
+                ApiSuccessResponse(code, msg, data)
         }
-//             **/
 
+    }
+
+    override fun toString(): String {
+        return "ApiResponse(code='$code', msg='$msg', data=$data)"
     }
 
 }
@@ -47,13 +38,13 @@ fun <T> ApiResponse<T>.toResource(): Resource<T> {
     return when (this) {
         is ApiSuccessResponse -> Resource.success(this.data)
         is ApiEmptyResponse -> Resource.success(null)
-        is ApiErrorResponse -> Resource.error(this.message, null)
-        else -> Resource.error(this.message, null)
+        is ApiErrorResponse -> Resource.error(this.msg, null)
+        else -> Resource.error(this.msg, null)
     }
 }
 
 class ApiEmptyResponse<T>(code: String, message: String) : ApiResponse<T>(code, message, null)
 class ApiSuccessResponse<T> constructor(code: String, message: String, data: T?) : ApiResponse<T>(code, message, data)
-class ApiErrorResponse<T>(code: String, errorMessage: String) : ApiResponse<T>(code, errorMessage, null)
+class ApiErrorResponse<T>(code: String, message: String, val throwable: Throwable?) : ApiResponse<T>(code, message, null)
 
 

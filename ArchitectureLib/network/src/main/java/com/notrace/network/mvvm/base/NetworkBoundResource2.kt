@@ -79,7 +79,7 @@ abstract class NetworkBoundResource2<ResultType, RequestType>
             }
             is ApiErrorResponse -> {
                 onFetchFailed()
-                setValue(Resource.error(response.message, null))
+                setValue(Resource.error(response.msg, null))
             }
         }
     }
