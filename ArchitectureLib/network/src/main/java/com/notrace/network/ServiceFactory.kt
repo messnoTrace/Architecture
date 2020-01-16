@@ -42,7 +42,7 @@ object ServiceFactory {
     init {
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addCallAdapterFactory( LiveDataCallAdapterFactory())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .addCallAdapterFactory(
                 RxJava2CallAdapterFactory.create(
                     ServerResponse::class.java

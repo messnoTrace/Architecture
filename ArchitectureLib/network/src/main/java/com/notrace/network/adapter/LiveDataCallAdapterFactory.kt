@@ -19,11 +19,11 @@ class LiveDataCallAdapterFactory : CallAdapter.Factory() {
 
         if (rawObservableType == ApiResponse::class.java) {
             // 返回LiveData<ApiResponse<**>>
-//            if (observableType !is ParameterizedType) {
-//                throw IllegalArgumentException("resource must be parameterized")
-//            }
-//            return LiveDataCallAdapter<Any>(rawObservableType)
+            if (observableType !is ParameterizedType) {
+                throw IllegalArgumentException("resource must be parameterized")
+            }
             return LiveDataCallAdapter<Any>(observableType)
+//            return LiveDataCallAdapter<Any>(observableType)
         } else
             throw IllegalArgumentException("type must be a ApiResponse")
     }
